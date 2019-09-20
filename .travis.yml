@@ -10,14 +10,14 @@ script:
   - docker run -e CI=true nehsus/react-test npm run test
 
 after_success:
-  - docker build -t sushen/multi-client ./client
-  - docker build -t sushen/multi-nginx ./nginx
-  - docker build -t sushen/multi-worker ./worker
-  - docker build -t sushen/multi-server ./server
+  - docker build -t nehsus/multi-client ./client
+  - docker build -t nehsus/multi-nginx ./nginx
+  - docker build -t nehsus/multi-worker ./worker
+  - docker build -t nehsus/multi-server ./server
 
   #Login to Travis CI
   - echo "$DOCKER_KEY" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push sushen/multi-client
-  - docker push sushen/multi-nginx
-  - docker push sushen/multi-worker
-  - docker push sushen/multi-server
+  - docker push nehsus/multi-client
+  - docker push nehsus/multi-nginx
+  - docker push nehsus/multi-worker
+  - docker push nehsus/multi-server
