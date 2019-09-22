@@ -19,8 +19,10 @@ services:
       - /app/node_modules
       - ./server:/app
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_MASTER_HOST=redis-master
+      - REDIS_SLAVE_HOST=redis-slave
+      - REDIS_MASTER_PORT=6379
+      - REDIS_SLAVE_PORT=6379
       - PGUSER=postgres
       - PGHOST=postgres
       - PGDATABASE=postgres
@@ -35,8 +37,10 @@ services:
       - ./client:/app
   worker:
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      - REDIS_MASTER_HOST=redis-master
+      - REDIS_SLAVE_HOST=redis-slave
+      - REDIS_MASTER_PORT=6379
+      - REDIS_SLAVE_PORT=6379
     build:
       dockerfile: Dockerfile.dev
       context: ./worker
