@@ -11,13 +11,11 @@ script:
 
 after_success:
   - docker build -t nehsus/multi-client ./client
-  - docker build -t nehsus/multi-nginx ./nginx
   - docker build -t nehsus/multi-worker ./worker
   - docker build -t nehsus/multi-server ./server
 
   #Login to Travis CI
   - echo "$DOCKER_KEY" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push nehsus/multi-client
-  - docker push nehsus/multi-nginx
   - docker push nehsus/multi-worker
   - docker push nehsus/multi-server
