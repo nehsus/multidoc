@@ -26,11 +26,7 @@ pgClient
 
 // Redis Client Setup
 const redis = require('redis');
-const redisSlaveClient = redis.createClient({
-  host: keys.redisSlaveHost,
-  port: keys.redisSlavePort,
-  retry_strategy: () => 1000
-});
+
 const redisMasterClient = redis.createClient({
   host: keys.redisMasterHost,
   port: keys.redisMasterPort,
@@ -51,7 +47,7 @@ app.get('/values/all', async (req, res) => {
 });
 
 app.get('/values/current', async (req, res) => {
-  redisSlaveClient.hgetall('values', (err, values) => {
+  redisMasterClient.hgetall('values', (err, values) => {
     res.send(values);
   });
 });
